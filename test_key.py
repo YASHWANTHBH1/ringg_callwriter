@@ -1,7 +1,9 @@
-import toml
+from playwright.sync_api import sync_playwright
 
-try:
-    data = toml.load(".streamlit/secrets.toml")
-    print("Key Found:", data["default"]["GROQ_API_KEY"][:10], "...")
-except Exception as e:
-    print("Error:", e)
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    page = browser.new_page()
+    page.goto("https://www.ringg.ai")
+    print(page.title())
+    browser.close()
+
