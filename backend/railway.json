@@ -1,0 +1,7 @@
+{
+  "build": {
+    "root": "backend",
+    "buildCommand": "pip install -r requirements.txt",
+    "startCommand": "./start.sh"
+  }
+}
