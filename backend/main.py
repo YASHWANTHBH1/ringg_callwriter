@@ -8,53 +8,84 @@ from core.scraper import scrape_website
 from core.generator import generate_scripts
 from dotenv import load_dotenv
 import os
+import traceback
 
-load_dotenv()  # Load variables from .env file
+# Load environment variables
+load_dotenv()
 
 app = FastAPI()
 
-# Optional: Replace * with specific frontend URLs (e.g., http://localhost:3000)
+# Allow frontend (React/Vercel) to access the API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # You can restrict this to your frontend domain
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Root check (optional)
+@app.get("/")
+def health_check():
+    return {"status": "✅ Backend running", "message": "Hello from CallWriter API!"}
+
+# Request payload structure
 class GenerationRequest(BaseModel):
     url: str
-    mode: str  # Friendly / Professional / Casual
+    mode: str  # e.g. Friendly / Professional / Casual
     intentCount: int
-    domain: str  # General, Sales, Support, etc.
+    domain: str  # Optional domain like sales/support/etc.
 
+# Main generation endpoint
 @app.post("/generate")
 def generate_intents(request: GenerationRequest):
     try:
-        # Load API key
+        print(f"📥 Request payload: {request.dict()}")
+
+        # Load GROQ API key
         GROQ_API_KEY = os.getenv("GROQ_API_KEY")
         if not GROQ_API_KEY:
+            print("❌ Missing GROQ API Key")
             raise HTTPException(status_code=401, detail="GROQ API Key missing")
 
-        # Normalize and scrape
+        # Normalize URL
         url = request.url.strip()
         if not url.startswith("http"):
             url = "https://" + url
+
+        print(f"🔗 Normalized URL: {url}")
         raw_text = scrape_website(url)
-        if not raw_text:
+
+        if not raw_text or len(raw_text.strip()) < 50:
+            print("❌ Website scraping returned empty or too short.")
             raise HTTPException(status_code=404, detail="Could not scrape website content")
 
-        # Clean and generate
         cleaned_text = clean_html_text(raw_text)
-        result = generate_scripts(cleaned_text, request.mode, request.intentCount, GROQ_API_KEY, request.domain)
+        print(f"🧼 Cleaned content length: {len(cleaned_text)} characters")
 
-        if result is None:
+        result = generate_scripts(
+            raw_text=cleaned_text,
+            tone=request.mode,
+            count=request.intentCount,
+            api_key=GROQ_API_KEY,
+            domain=request.domain
+        )
+
+        if not result:
+            print("❌ Script generation failed")
             raise HTTPException(status_code=500, detail="Script generation failed")
 
-        return {"status": "success", "scripts": result}
+        print("✅ Successfully generated scripts")
+        return {
+            "status": "success",
+            "scripts": result
+        }
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print("🔥 Internal error during generation:")
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Unhandled Error: {str(e)}")
+
 
 
 
