@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Roboto:wght@400;500;700&family=Satisfy&display=swap');
+
+/* General Reset & Base */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f8;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.app-container {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Announcement bar */
+.announcement-bar {
+  background: linear-gradient(90deg, #2d2c2c, #000000);
+  color: white;
+  padding: 6px 24px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 40px;
+  background-color: white;
+  flex-wrap: wrap;
+  height: 48px;
+}
+
+.logo {
+  height: 72px;
+  max-height: 80px;
+}
+
+.nav-links a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: #070707;
+  font-weight: 500;
+}
+
+.contact-btn {
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 20px 20px 30px;
+}
+
+.main-heading {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3rem;
+  color: #050505;
+  margin: 0;
+}
+
+.sub-heading {
+  font-family: 'Satisfy', cursive;
+  font-size: 1.8rem;
+  color: #050505;
+  margin: 0 0 15px;
+}
+
+.hero-description {
+  font-size: 1rem;
+  color: #000000;
+  font-family: 'Playfair Display', serif;
+}
+
+.hero-description a {
+  color: #0072ff;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Tool Card */
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: #ffffff;
+  min-height: 100vh;
+  Margin-top: -32px; /* Push phone down slightly from top */
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+/* Phone frame */
+.phone-frame {
+  position: relative;
+  width: 360px;
+  height: 448px; /* cropped height (~70% of 640px) */
+  background: #fff;
+  border: 8px solid #000;
+  border-bottom: none; /* 🔥 Remove bottom border */
+  border-top-left-radius: 36px;
+  border-top-right-radius: 36px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+
+/* Simulated notch */
+.phone-frame .notch {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 100px;      /* width of the notch */
+  height: 20px;      /* height of the notch */
+  background: #000;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* Screen area inside the frame */
+.phone-frame .screen {
+  position: absolute;
+  top: 20px;         /* gap below notch */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 20px);
+  overflow-y: auto;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px; /* space above card */
+  box-sizing: border-box;
+}
+
+/* Card inside the screen */
+.form-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 0px 24px;
+  width: 90%;
+  max-width: 320px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  margin-top: 0;
+  margin-left: 20%;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-text h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.online-status {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #cb12df;
+  background-color: #e4d0e5;         /* Green background */
+  padding: 4px 10px;
+  border-radius: 12px;               /* Rounded corners */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  margin: 6px auto 0;                /* Center it below title */
+}
+
+.dot {
+  height: 6px;
+  width: 6px;
+  background-color: #cb12df;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Form fields */
+.card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-form input,
+.card-form select {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(221, 35, 231, 0.1);
+  border-color: #cc1af0;
+  background: #f7f7f7;
+  outline: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.card-form input:focus,
+.card-form select:focus {
+  border-color: #0072ff;
+  background: #fff;
+}
+
+
+.generate-btn {
+  background-color: #060606;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.generate-btn:hover {
+  background-color: #000000;
+}
+
+.error {
+  color: #e53e3e;
+  font-size: 0.9rem;
+  text-align: center;
+}
+/* ✅ Wrapper for phone and overlay */
+.phone-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ✅ Full-width bottom overlay image */
+.phone-bottom-overlay {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  height: auto;
+  margin-top: -35px; /* Pull it upward to overlap phone bottom */
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+
+
+
+
+
+
+
+

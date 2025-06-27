@@ -1,0 +1,19 @@
+
+---
+
+### ✅ `4. prompts/default_prompt.txt`
+```txt
+Generate {n} realistic customer call intents based on the content provided. Each intent should include:
+- A natural user question
+- A clear AI response in the selected tone
+
+Return output in clean JSON:
+[
+  {
+    "intent": "Example Intent",
+    "script": [
+      {"user": "User message", "ai": "Agent reply"},
+      ...
+    ]
+  }
+]

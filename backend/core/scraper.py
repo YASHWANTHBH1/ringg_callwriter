@@ -1,6 +1,11 @@
 from bs4 import BeautifulSoup
+import asyncio
+import sys
 from playwright.sync_api import sync_playwright
 import requests
+if sys.platform.startswith("win"):
+    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+
 
 def normalize_url(url):
     if not url.startswith(("http://", "https://")):
