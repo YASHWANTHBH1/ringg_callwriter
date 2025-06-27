@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: callwriter-backend
+    env: python
+    plan: free
+    branch: main
+    rootDir: backend
+    buildCommand: pip install -r requirement.txt
+    startCommand: ./start.sh
+    autoDeploy: true
+    region: oregon
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false  # You will add this in the Render dashboard UI
