@@ -14,6 +14,7 @@ function App() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +22,7 @@ function App() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form reload
+    e.preventDefault();
 
     if (!formData.url || !formData.mode || !formData.domain) {
       setError("Please fill all fields before generating.");
@@ -63,13 +64,32 @@ function App() {
       {/* 🔗 Navbar */}
       <header className="navbar">
         <img src="/assets/ringg_logo.png" alt="Ringg Logo" className="logo" />
-        <nav className="nav-links">
+
+        {/* Desktop Links */}
+        <nav className="nav-links desktop-only">
           <a href="https://github.com/YASHWANTHBH1/ringg_callwriter" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="https://drive.google.com/file/d/1n0qKidtfdrJya3v9v9Ppd2XzrcW4UKJ3/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
           <a href="https://yashwanthbh.netlify.app/" target="_blank" rel="noopener noreferrer">Portfolio</a>
         </nav>
-        <a href="mailto:yashwanthbh382@gmail.com" className="contact-btn">Contact</a>
+
+        {/* Desktop Contact Button */}
+        <a href="mailto:yashwanthbh382@gmail.com" className="contact-btn desktop-only">Contact</a>
+
+        {/* Mobile Button */}
+        <button className="know-more-btn mobile-only" onClick={() => setShowMobileMenu(!showMobileMenu)}>
+          {showMobileMenu ? "Close" : "Know More"}
+        </button>
       </header>
+
+      {/* Mobile Nav Dropdown */}
+      {showMobileMenu && (
+        <nav className="mobile-nav mobile-only">
+          <a href="https://github.com/YASHWANTHBH1/ringg_callwriter" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://drive.google.com/file/d/1n0qKidtfdrJya3v9v9Ppd2XzrcW4UKJ3/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
+          <a href="https://yashwanthbh.netlify.app/" target="_blank" rel="noopener noreferrer">Portfolio</a>
+          <a href="mailto:yashwanthbh382@gmail.com">Contact</a>
+        </nav>
+      )}
 
       {/* 📢 Hero Section */}
       <section className="hero-section">
@@ -91,38 +111,20 @@ function App() {
                   <div className="header-text">
                     <h2>Ringg AI Call Writer</h2>
                     <div className="online-status">
-                      <center>
-                        <span className="dot" /> Online
-                      </center>
+                      <center><span className="dot" /> Online</center>
                     </div>
                   </div>
                 </div>
 
                 <form onSubmit={handleSubmit} className="card-form">
-                  <input
-                    type="text"
-                    name="url"
-                    placeholder="Company URL / FAQs"
-                    value={formData.url}
-                    onChange={handleChange}
-                  />
-
+                  <input type="text" name="url" placeholder="Company URL / FAQs" value={formData.url} onChange={handleChange} />
                   <select name="mode" value={formData.mode} onChange={handleChange}>
                     <option value="">Select Mode</option>
                     <option value="friendly">Friendly</option>
                     <option value="professional">Professional</option>
                     <option value="casual">Casual</option>
                   </select>
-
-                  <input
-                    type="number"
-                    name="intentCount"
-                    min="1"
-                    max="6"
-                    value={formData.intentCount}
-                    onChange={handleChange}
-                  />
-
+                  <input type="number" name="intentCount" min="1" max="6" value={formData.intentCount} onChange={handleChange} />
                   <select name="domain" value={formData.domain} onChange={handleChange}>
                     <option value="">Select Domain</option>
                     <option value="sales">Sales</option>
@@ -134,7 +136,6 @@ function App() {
                   </select>
 
                   {error && <div className="error">{error}</div>}
-
                   <button type="submit" className="generate-btn">
                     {loading ? "Generating..." : "Generate"}
                   </button>
@@ -142,13 +143,7 @@ function App() {
               </div>
             </div>
           </div>
-
-          {/* 📸 Bottom Overlay */}
-          <img
-            src="/assets/cut-overlay.png"
-            alt="Overlay Design"
-            className="phone-bottom-overlay"
-          />
+          <img src="/assets/cut-overlay.png" alt="Overlay Design" className="phone-bottom-overlay" />
         </div>
       </div>
     </div>
@@ -156,6 +151,8 @@ function App() {
 }
 
 export default App;
+
+
 
 
 
