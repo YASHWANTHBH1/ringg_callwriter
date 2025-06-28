@@ -32,9 +32,7 @@ function Results() {
           <a href="https://drive.google.com/file/d/1n0qKidtfdrJya3v9v9Ppd2XzrcW4UKJ3/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
           <a href="https://yashwanthbh.netlify.app/" target="_blank" rel="noopener noreferrer">Portfolio</a>
         </nav>
-        <Link to="/">
-          <a href="mailto:yashwanthbh382@gmail.com" className="contact-btn">Contact</a>
-        </Link>
+          <Link to="/" className="contact-btn">Back</Link>
       </header>
 
       <div className="results-container">
